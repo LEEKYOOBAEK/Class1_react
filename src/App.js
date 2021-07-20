@@ -13,7 +13,9 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
+      mode:'read',
       subject:{title:'WEB', sub:'World wide web!!'},
+      welcome:{title:'welcome', desc:'Hello, React!!'},
       contents:[
         {id:1, title:'HTML', desc:'HTML is Hypertext...'},
         {id:2, title:'Css', desc:'Css us fir design'},
@@ -22,6 +24,16 @@ class App extends Component {
     }
   }
   render() {
+    console.log('App render');
+    var _title, _desc = null;
+    if(this.state.mode === 'welcome'){
+      _title = this.state.welcome.title;
+      _desc = this.state.welcome.desc;
+    } else if(this.state.mode === 'read'){
+      _title = this.state.contents[0].title;
+      _desc = this.state.contents[0].desc;
+      
+    }
     return (
       <div className="App">
         <Subject 
@@ -29,7 +41,7 @@ class App extends Component {
           sub={this.state.subject.sub}>
         </Subject>
         <TOC data={this.state.contents}></TOC>
-        <Content title="HTML" desc="HTML is HyperText Markup Language."></Content>
+        <Content title={_title} desc={_desc}></Content>
       </div>
     );
   }
