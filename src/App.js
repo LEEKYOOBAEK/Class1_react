@@ -66,7 +66,9 @@ class App extends Component {
             {this.state.subject.sub}
         </header> */}
         <TOC onChangePage={function(){
-          this.setState({mode:'read'});
+          this.setState({mode:'read',
+          selected_content_id_:0
+          });
         }.bind(this)}
         data={this.state.contents}></TOC>
         <Content title={_title} desc={_desc}></Content>
