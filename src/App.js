@@ -54,23 +54,15 @@ class App extends Component {
           }.bind(this)}
           > 
         </Subject>
-        {/* <header>
-            <h1><a href="/" onClick={function(e){
-              console.log(e);
-              e.preventDefault();
-              
-              this.setState({
-                mode:'welcome'
-              });
-            }.bind(this)}>{this.state.subject.title}</a></h1>
-            {this.state.subject.sub}
-        </header> */}
-        <TOC onChangePage={function(id){
-          this.setState({mode:'read',
-          selected_content_id_:Number(id)
-          });
-        }.bind(this)}
-        data={this.state.contents}></TOC>
+        <TOC 
+          onChangePage={function(id){
+           this.setState({
+            mode:'read',
+            selected_content_id:Number(id)
+           });
+          }.bind(this)}
+          data={this.state.contents}
+        ></TOC>
         <Content title={_title} desc={_desc}></Content>
       </div>
     );
