@@ -15,7 +15,6 @@ class App extends Component {
   constructor(props){
     super(props);
     this.max_content_id = 3;
-    
     this.state = {
       mode:'create',
       selected_content_id:2,
