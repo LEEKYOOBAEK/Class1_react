@@ -17,7 +17,7 @@ class App extends Component {
     super(props);
     this.max_content_id = 3;
     this.state = {
-      mode:'create',
+      mode:'welcome',
       selected_content_id:2,
       subject:{title:'WEB', sub:'World wide web!!'},
       welcome:{title:'welcome', desc:'Hello, React!!'},
@@ -58,8 +58,6 @@ class App extends Component {
           mode:'read',
           selected_content_id:this.max_content_id
         });
-        // 새로운 컨텐트값을 추가 add content to this.state.contents
-        
       }.bind(this)}></CreateContent>
     } else if(this.state.mode === 'update'){
       _content = this.getReadContent();
@@ -80,7 +78,8 @@ class App extends Component {
           });
           
         }.bind(this)}></UpdateContent>
-    }
+    } 
+
     return _article;
   }
   render() {
@@ -107,9 +106,28 @@ class App extends Component {
           data={this.state.contents}
         ></TOC>
         <Control onChangeMode={function(_mode){
-          this.setState({
+          if(_mode ==='delete') {
+            if(window.confirm('really?')){
+              var _contents = Array.from(this.state.contents);
+              var i = 0;
+              while(i < _contents.length){
+                if(_contents[i].id === this.state.selected_content_id) {
+                  _contents.splice(i,1);
+                  break;
+                }
+                i = i + 1;
+              }
+              this.setState({
+                mode:'welcome',
+                contents:_contents
+              });
+              alert('deleted!');
+            }
+          } else {
+            this.setState({
             mode:_mode
           });
+          }
         }.bind(this)}></Control>
         {this.getContent()}
       </div>
